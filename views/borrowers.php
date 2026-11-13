@@ -1,4 +1,7 @@
-<?php require __DIR__ . '/header.php'; ?>
+<?php
+$borrowers = $borrowers ?? array();
+require __DIR__ . '/header.php';
+?>
 <h1>Current borrowers</h1>
 <p>These are the books that have not been returned yet.</p>
 <div class="table-wrap"><table><thead><tr><th>Student username</th><th>Book</th><th>Author</th><th>Borrowed</th><th>Return by</th><th>Loan status</th></tr></thead><tbody>

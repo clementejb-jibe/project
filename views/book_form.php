@@ -1,4 +1,9 @@
-<?php require __DIR__ . '/header.php'; $editing = !empty($book); ?>
+<?php
+$book = $book ?? array();
+$error = $error ?? '';
+$editing = !empty($book);
+require __DIR__ . '/header.php';
+?>
 <h1><?= $editing ? 'Edit book' : 'Add a book' ?></h1>
 <?php if ($error): ?><div class="error"><?= e($error) ?></div><?php endif; ?>
 <form class="card form" method="post">
