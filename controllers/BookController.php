@@ -13,13 +13,15 @@ class BookController
         $myBooks = isset($_SESSION['user']) && $_SESSION['user']['role'] === 'USER' ? $this->books->borrowedBy($_SESSION['user']['id']) : array();
         $borrowNotice = $_SESSION['borrow_notice'] ?? null;
         unset($_SESSION['borrow_notice']);
-        require __DIR__ . '/../views/books.php';
+        $GLOBALS['pageData'] = compact('allBooks', 'myBooks', 'borrowNotice');
+        $GLOBALS['pageView'] = 'books';
     }
 
     public function borrowers()
     {
         $borrowers = $this->books->activeBorrowers();
-        require __DIR__ . '/../views/borrowers.php';
+        $GLOBALS['pageData'] = compact('borrowers');
+        $GLOBALS['pageView'] = 'borrowers';
     }
 
     public function form($id = null)
@@ -33,7 +35,8 @@ class BookController
             $error = $result;
             $book = array_merge($book ?: array(), $_POST);
         }
-        require __DIR__ . '/../views/book_form.php';
+        $GLOBALS['pageData'] = compact('book', 'error');
+        $GLOBALS['pageView'] = 'book_form';
     }
 
     public function delete($id)

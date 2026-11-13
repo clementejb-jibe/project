@@ -1,3 +1,0 @@
-<?php require __DIR__ . '/header.php'; ?>
-<section class="card receipt"><h1>Payment receipt</h1><p><strong>Receipt number:</strong> <?= e($receipt['receipt_number']) ?></p><p><strong>Paid on:</strong> <?= e(readableDate($receipt['paid_at'])) ?></p><p><strong>Account:</strong> <?= e($_SESSION['user']['username']) ?></p><p><strong>Book:</strong> <?= e($receipt['title']) ?></p><p><strong>Amount paid:</strong> ₱<?= number_format((float) $receipt['amount'], 2) ?></p><p><strong>Payment method:</strong> Demo payment (no real charge)</p><button onclick="window.print()">Print receipt</button> <a href="index.php?page=account">Back to account</a></section>
-<?php require __DIR__ . '/footer.php'; ?>

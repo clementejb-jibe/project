@@ -15,7 +15,8 @@ class AuthController
             if ($user && $user->role === $role) { session_regenerate_id(true); $_SESSION['user'] = array('id' => $user->id, 'username' => $user->username, 'role' => $user->role); header('Location: index.php'); exit; }
             $error = 'Username or password is incorrect for this account type.';
         }
-        require __DIR__ . '/../views/login.php';
+        $GLOBALS['pageData'] = compact('accountType', 'error');
+        $GLOBALS['pageView'] = 'login';
     }
 
     public function register($role = 'USER')
@@ -27,7 +28,8 @@ class AuthController
             if ($result === true) { $_SESSION['flash'] = 'Account created. You can now sign in.'; header('Location: index.php?page=' . ($role === 'ADMIN' ? 'admin-login' : 'user-login')); exit; }
             $error = $result;
         }
-        require __DIR__ . '/../views/register.php';
+        $GLOBALS['pageData'] = compact('accountType', 'error');
+        $GLOBALS['pageView'] = 'register';
     }
 
     public function logout()
